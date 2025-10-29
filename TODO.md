@@ -13,7 +13,7 @@ This file outlines the initial tasks for the development team. Each task is assi
 
 ### **Programmer**
 - **Assignee:** Programmer Agent
-- **Status:** Pending
+- **Status:** Complete
 - **Task:**
     1.  Create a simple "Player" scene with a `CharacterBody2D` node.
     2.  Implement a basic movement script (`player.gd`) that allows for top-down movement (up, down, left, right).
@@ -25,7 +25,7 @@ This file outlines the initial tasks for the development team. Each task is assi
 
 ### **Artist**
 - **Assignee:** Artist Agent
-- **Status:** Pending
+- **Status:** Complete
 - **Task:**
     1.  Design and create a placeholder sprite for the main character.
     2.  The sprite should be a simple, top-down view that fits a 32x32 pixel dimension.
@@ -36,7 +36,7 @@ This file outlines the initial tasks for the development team. Each task is assi
 
 ### **Researcher**
 - **Assignee:** Researcher Agent
-- **Status:** Pending
+- **Status:** Complete
 - **Task:**
     1.  Begin research on procedural generation algorithms for creating cyberpunk-style city maps.
     2.  Focus on techniques like L-Systems for road networks and Wave Function Collapse (WFC) for building placement.
