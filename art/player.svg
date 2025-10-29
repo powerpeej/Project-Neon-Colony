@@ -1,0 +1,6 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- TODO: Replace this placeholder SVG with a 32x32 PNG sprite. -->
+  <rect width="32" height="32" fill="#4a4a4a"/>
+  <rect x="12" y="8" width="8" height="16" fill="#7ac5cd"/>
+  <rect x="14" y="4" width="4" height="4" fill="#c4f0c2"/>
+</svg>
