@@ -25,7 +25,6 @@ window/stretch/aspect="keep"
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-
 [application]
 
 config/run/main_scene="res://scenes/main.tscn"
