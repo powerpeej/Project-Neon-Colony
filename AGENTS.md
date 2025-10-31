@@ -49,3 +49,9 @@ To facilitate a simulated multi-agent workflow, we will adopt different personas
 4.  Once complete, the work will be submitted for review by the **Project Manager**.
 
 This process helps us maintain a clear separation of concerns and ensures that each aspect of the project receives the focused attention it deserves.
+
+## Technical Guidelines
+
+This section documents key architectural decisions and best practices to be followed by the team.
+
+*   **AI Behavior Systems:** Based on research into scalability and modularity, the project will use **Behavior Trees** for complex agent AI. For more details, refer to the full research document: `docs/ai_systems_research.md`.
