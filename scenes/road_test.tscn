@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://h5wexyvj3x0w7k1"]
+
+[ext_resource type="PackedScene" uid="uid://bciyvj3x0w7k1" path="res://scenes/tiles/roads/road_straight.tscn" id="1_abcde"]
+[ext_resource type="PackedScene" uid="uid://c1wexyvj3x0w7k1" path="res://scenes/tiles/roads/road_corner.tscn" id="2_fghij"]
+[ext_resource type="PackedScene" uid="uid://d2wexyvj3x0w7k1" path="res://scenes/tiles/roads/road_t_junction.tscn" id="3_klmno"]
+[ext_resource type="PackedScene" uid="uid://f3wexyvj3x0w7k1" path="res://scenes/tiles/roads/road_cross.tscn" id="4_pqrst"]
+[ext_resource type="PackedScene" uid="uid://g4wexyvj3x0w7k1" path="res://scenes/tiles/roads/road_end.tscn" id="5_uvwxy"]
+
+[node name="RoadTest" type="Node2D"]
+
+[node name="RoadStraight" parent="." instance=ExtResource("1_abcde")]
+position = Vector2(128, 0)
+
+[node name="RoadCorner" parent="." instance=ExtResource("2_fghij")]
+position = Vector2(0, 0)
+
+[node name="RoadT_Junction" parent="." instance=ExtResource("3_klmno")]
+position = Vector2(128, 128)
+
+[node name="RoadCross" parent="." instance=ExtResource("4_pqrst")]
+position = Vector2(0, 128)
+
+[node name="RoadEnd" parent="." instance=ExtResource("5_uvwxy")]
+position = Vector2(256, 0)
