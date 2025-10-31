@@ -12,11 +12,51 @@ MAIN_BRANCH_NAME = "main"
 JULES_EXECUTABLE_PATH = "C:/Users/power/AppData/Roaming/npm/jules.cmd"
 # --- End Configuration ---
 
+# ... (All other functions like sync_with_remote_and_prepare, parse_structured_todo, etc., are unchanged) ...
+
+def create_jules_task_with_cli(prompt: str) -> str | None:
+    """
+    Calls the Jules CLI. If successful, it parses and returns the session ID.
+    --- THIS FUNCTION IS UPDATED ---
+    """
+    print("---")
+    print(f"-> Creating task for prompt:\n{prompt}\n")
+    try:
+        command = [JULES_EXECUTABLE_PATH, "remote", "new", "--repo", ".", "--session", prompt]
+        result = subprocess.run(command, capture_output=True, text=True, check=True)
+        
+        session_id = None
+        # --- NEW, MORE ROBUST PARSING LOGIC ---
+        # We will look for common key phrases like "Session ID:", "ID:", etc.
+        # and make the search case-insensitive.
+        for line in result.stdout.splitlines():
+            clean_line = line.strip().lower() # Standardize the line
+            if clean_line.startswith("session id:") or clean_line.startswith("id:"):
+                # We found the line! Split it by the colon and take the last part.
+                session_id = line.split(":")[-1].strip()
+                break # Exit the loop once we've found it
+
+        if session_id:
+            print(f"--> Success! Parsed Session ID: {session_id}")
+            return session_id
+        else:
+            # This error now means we truly couldn't find the ID in the output
+            print("--> Task created, but could not parse Session ID from output.")
+            print("--> Full output from CLI:")
+            print(result.stdout) # Print the full output to help debug
+            return None
+
+    except Exception as e:
+        print(f"--> Failed to create task. Error: {e}")
+        return None
+
+# ... (The rest of the script: get_jules_task_status, update_todo_for_completion, create_pull_request, etc., are all unchanged) ...
+# I will include the full script below for clarity.
+
 #==============================================================================
-# SECTION 0: GIT SYNCHRONIZATION (Unchanged)
+# SECTION 0: GIT SYNCHRONIZATION
 #==============================================================================
 def sync_with_remote_and_prepare() -> bool:
-    # ... (This function is unchanged)
     print("---")
     print("Step 0: Synchronizing with remote repository...")
     try:
@@ -38,10 +78,9 @@ def sync_with_remote_and_prepare() -> bool:
         return False
 
 #==============================================================================
-# SECTION 1: PARSING AND JULES INTERACTION (with one new function)
+# SECTION 1: PARSING AND JULES INTERACTION
 #==============================================================================
 def parse_structured_todo(filename: str) -> dict[str, str]:
-    # ... (This function is unchanged)
     prompts = {}
     try:
         with open(filename, "r", encoding="utf-8") as f: lines = f.readlines()
@@ -68,25 +107,16 @@ def parse_structured_todo(filename: str) -> dict[str, str]:
     return prompts
 
 def get_existing_jules_sessions() -> dict[str, str]:
-    """
-    Calls 'jules remote list' and parses the output to get existing sessions.
-    Returns a dictionary of {first_line_of_prompt: session_id}.
-    NOTE: This parsing is based on an assumed output format.
-    """
     print("  - Scanning for all existing remote Jules sessions...")
     sessions = {}
     try:
         command = [JULES_EXECUTABLE_PATH, "remote", "list"]
         result = subprocess.run(command, capture_output=True, text=True, check=True)
-        
-        # This parsing logic assumes an output format like:
-        # ID: <id> | Status: <status> | Prompt: <prompt_text>
         for line in result.stdout.splitlines():
             if "ID:" in line and "Prompt:" in line:
                 parts = line.split("|")
                 session_id = parts[0].replace("ID:", "").strip()
                 prompt_text = parts[2].replace("Prompt:", "").strip()
-                # We use the first line of the prompt as a key, as the list view might truncate it
                 sessions[prompt_text] = session_id
         print(f"  - Found {len(sessions)} existing sessions on the server.")
         return sessions
@@ -94,22 +124,7 @@ def get_existing_jules_sessions() -> dict[str, str]:
         print(f"  - WARNING: Could not retrieve existing Jules sessions. Error: {e}")
         return {}
 
-def create_jules_task_with_cli(prompt: str) -> str | None:
-    # ... (This function is unchanged)
-    print("---")
-    print(f"-> Creating task for prompt:\n{prompt}\n")
-    try:
-        command = [JULES_EXECUTABLE_PATH, "remote", "new", "--repo", ".", "--session", prompt]
-        result = subprocess.run(command, capture_output=True, text=True, check=True)
-        session_id = None
-        for line in result.stdout.splitlines():
-            if "Session created:" in line: session_id = line.split(":")[-1].strip()
-        if session_id: print(f"--> Success! Found Session ID: {session_id}"); return session_id
-        else: print("--> Task created, but could not parse Session ID from output."); return None
-    except Exception as e: print(f"--> Failed to create task. Error: {e}"); return None
-
 def get_jules_task_status(session_id: str) -> str | None:
-    # ... (This function is unchanged)
     try:
         command = [JULES_EXECUTABLE_PATH, "remote", "get", session_id]
         result = subprocess.run(command, capture_output=True, text=True, check=True)
@@ -120,10 +135,9 @@ def get_jules_task_status(session_id: str) -> str | None:
     except FileNotFoundError: return "ERROR"
 
 #==============================================================================
-# SECTION 2: FILE AND GIT MANIPULATION (Unchanged)
+# SECTION 2: FILE AND GIT MANIPULATION
 #==============================================================================
 def update_todo_for_completion(full_prompt_text: str) -> bool:
-    # ... (This function is unchanged)
     print(f"  - Updating {TODO_FILENAME} to mark task as complete...")
     try:
         with open(TODO_FILENAME, 'r', encoding='utf-8') as f: lines = f.readlines()
@@ -146,7 +160,6 @@ def update_todo_for_completion(full_prompt_text: str) -> bool:
         return False
 
 def create_pull_request(session_id: str, prompt_hash: str):
-    # ... (This function is unchanged)
     print("  - Starting Git process to create a Pull Request...")
     branch_name = f"docs/complete-task-{session_id}"
     commit_message = f"docs: Mark task as complete\n\nAssociated Jules Session: {session_id}"
@@ -170,44 +183,34 @@ def create_pull_request(session_id: str, prompt_hash: str):
         subprocess.run(["git", "checkout", MAIN_BRANCH_NAME])
 
 #==============================================================================
-# SECTION 3: MAIN WORKFLOWS (with new 'sync' mode)
+# SECTION 3: MAIN WORKFLOWS
 #==============================================================================
-
 def run_sync_mode():
-    """Scans for existing Jules sessions and adopts any that match untracked tasks in TODO.md."""
     print("Running in SYNC mode...")
     if not sync_with_remote_and_prepare(): return
-
     tasks_in_todo = parse_structured_todo(TODO_FILENAME)
     if not tasks_in_todo: print("No pending tasks found in TODO.md."); return
-
     tracked_tasks = {}
     if os.path.exists(TRACKING_FILE):
         with open(TRACKING_FILE, 'r', newline='', encoding='utf-8') as f:
             reader = csv.reader(f)
             for row in reader: tracked_tasks[row[0]] = row[1]
-
     untracked_tasks = {h: p for h, p in tasks_in_todo.items() if h not in tracked_tasks}
     if not untracked_tasks:
         print("All pending tasks in TODO.md are already being tracked.")
         return
-
     print(f"Found {len(untracked_tasks)} untracked tasks in TODO.md. Checking for existing sessions...")
-    existing_sessions = get_existing_jules_sessions() # {prompt_first_line: session_id}
+    existing_sessions = get_existing_jules_sessions()
     if not existing_sessions:
         print("No existing remote sessions found to sync with.")
         return
-
     adopted_tasks = []
     for prompt_hash, full_prompt in untracked_tasks.items():
-        # The prompt from 'jules remote list' might be truncated, so we check the first line
         first_line_of_prompt = full_prompt.splitlines()[0]
-        
         if first_line_of_prompt in existing_sessions:
             session_id = existing_sessions[first_line_of_prompt]
             print(f"  - MATCH FOUND! Adopting session '{session_id}' for task: '{first_line_of_prompt}'")
             adopted_tasks.append([prompt_hash, session_id, full_prompt])
-
     if adopted_tasks:
         with open(TRACKING_FILE, 'a', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
@@ -217,7 +220,6 @@ def run_sync_mode():
         print("\nFound no existing sessions that match untracked tasks.")
 
 def run_create_mode():
-    # ... (This function is unchanged)
     print("Running in CREATE mode...")
     if not sync_with_remote_and_prepare(): return
     tasks_in_todo = parse_structured_todo(TODO_FILENAME)
@@ -241,7 +243,6 @@ def run_create_mode():
         print(f"\nSuccessfully tracked {len(created_tasks_log)} new tasks in {TRACKING_FILE}.")
 
 def run_review_mode():
-    # ... (This function is unchanged)
     print("Running in REVIEW mode...")
     if not sync_with_remote_and_prepare(): return
     if not os.path.exists(TRACKING_FILE): print(f"Tracking file '{TRACKING_FILE}' not found."); return
@@ -270,7 +271,7 @@ def run_review_mode():
 #==============================================================================
 if __name__ == "__main__":
     if len(sys.argv) < 2 or sys.argv[1] not in ['create', 'review', 'sync']:
-        print("Usage: python auto_agent.py [mode]")
+        print("Usage: python agent_controller_final_v2.py [mode]")
         print("Modes:")
         print("  sync     - Scans for existing Jules sessions and adopts them into the tracking file.")
         print("  create   - Creates Jules tasks for any new, untracked items in TODO.md.")
