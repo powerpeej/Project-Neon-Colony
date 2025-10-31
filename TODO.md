@@ -6,13 +6,14 @@ This file outlines the tasks for the development team.
 ## **Pending Tasks**
 ---
 
-### **Project Manager**
-- **Assignee:** Project Manager Agent
+### **Programmer**
+- **Assignee:** Programmer Agent
 - **Status:** Pending
 - **Task:**
-    1. Review the implemented L-System and road generation.
-    2. Define the requirements for the initial building types (e.g., power plants, housing, factories).
-- **Goal:** Ensure the procedural generation system meets project standards and to guide the development of the building generation system.
+    1. Refactor the `RoadGenerator` to be more modular. Create a new `Turtle` class that handles the drawing logic, and move the L-System generation to a separate function.
+    2. Modify the `RoadGenerator` to place road tiles in a `TileMap` instead of drawing `Line2D` nodes.
+    3. Externalize the L-System rules to a JSON file (`res://procgen/lsystem_rules.json`) to allow for easier modification.
+- **Goal:** Improve the flexibility and modularity of the road generation system and integrate it with a `TileMap`.
 
 ---
 
@@ -85,7 +86,10 @@ This file outlines the tasks for the development team.
 
 ### **Project Manager**
 - **Status:** Complete
-- **Task:** Set up the initial project structure, `project.godot` file, `AGENTS.md`, and this `TODO.md`.
+- **Task:**
+    1. Review the implemented L-System and road generation.
+    2. Define the requirements for the initial building types (e.g., power plants, housing, factories).
+    3. Set up the initial project structure, `project.godot` file, `AGENTS.md`, and this `TODO.md`.
 
 ---
 
