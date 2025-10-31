@@ -1,0 +1,27 @@
+0f69a4f0b7eebe130c1f414edc546e137bcf9f8dc07280601e87c7c90628bad8,17096801453014759402,"1. Refactor the `RoadGenerator` to be more modular. Create a new `Turtle` class that handles the drawing logic, and move the L-System generation to a separate function.
+2. Modify the `RoadGenerator` to place road tiles in a `TileMap` instead of drawing `Line2D` nodes.
+3. Externalize the L-System rules to a JSON file (`res://procgen/lsystem_rules.json`) to allow for easier modification.
+- **Goal:** Improve the flexibility and modularity of the road generation system and integrate it with a `TileMap`."
+212f1f565d38fa453390ad1800dac7135a96d7c164d8e2b87ec2c6dc19dab0ff,6768011094140292122,"1.  Create a `WFC` class in `src/procgen/wfc.gd`.
+2.  The class should be able to take a set of tiles and their adjacency rules as input.
+3.  Implement the core WFC algorithm to generate a tilemap.
+4.  Create a `BuildingGenerator` node that uses the `WFC` class to generate buildings.
+- **Goal:** Create a system for procedurally generating buildings."
+80c4c9351b8b1512e456abbce22be85f3fdbec2c3bb05aa66fb24131588936c2,260696386897593990,"1. Implement a basic resource system (e.g., energy, materials).
+2. Create a global script (`/src/resource_manager.gd`) to manage resource storage and access.
+3. Create a simple UI scene (`/scenes/ui/resource_display.tscn`) to display the current resource levels.
+- **Goal:** Establish the foundational economic loop of the game."
+e5129bcf622517a2c868c1b4d646bf300065eabecd14abade8434b6b3e9c6e54,13281909639943551059,"1.  Design a set of modular, top-down road tiles (e.g., straight, corner, T-junction, cross-section).
+2.  Design a few simple, top-down building footprint sprites that can be used with the WFC algorithm.
+3.  All assets should be 32x32 pixels and fit the cyberpunk theme.
+4.  Export the assets as PNG files and add them to the `art/tiles/` directory.
+- **Goal:** Provide the visual assets needed for the procedural city generation."
+bb816619b9e09f12de0e6e01eb63ec8253e414fefc8076721e5eadacedbb4947,4589759138327397606,"1. Design UI elements for the resource display (e.g., icons for energy and materials, a background panel).
+2. Create sprites for the initial building types (power plant, housing, factory).
+- **Goal:** Create the visual assets for the resource system and initial buildings."
+f2507344cc77f0a275a767ecfb431e4044c13d8e19b3100d070b14ceaed018ad,16451597436516078410,"1. Research and write a report on simple agent-based AI behavior systems (e.g., state machines, behavior trees).
+2. Propose a basic AI architecture for the colonists (e.g., what needs they should have, how they should interact with buildings).
+- **Goal:** To inform the design of the colonist AI system."
+6d006a2d86c0cb8f1d1b6029189d5ca761c7f9684a3839ab5874cf6ee478f917,13089781666858273692,"1. Investigate performance optimization techniques for large-scale simulations in Godot (e.g., multithreading, visual optimization).
+2. Write a document summarizing the findings and providing recommendations.
+- **Goal:** To ensure the game can handle a large number of entities and complex systems without performance issues."
