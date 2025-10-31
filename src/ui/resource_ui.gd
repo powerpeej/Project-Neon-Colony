@@ -19,5 +19,5 @@ func _on_resource_changed(_resource_name: String, _new_value: int) -> void:
 func _update_labels() -> void:
 	if not ResourceManager:
 		return
-	energy_label.text = str(ResourceManager.get_resource("energy"))
-	materials_label.text = str(ResourceManager.get_resource("materials"))
+	energy_label.text = str(ResourceManager.get_resource_amount("energy"))
+	materials_label.text = str(ResourceManager.get_resource_amount("materials"))
