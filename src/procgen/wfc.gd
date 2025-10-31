@@ -18,6 +18,10 @@ var _tiles: Array = []
 # Expected format: { "tile_name": {"up": ["tile1", ...], "down": [...], ...} }
 var _rules: Dictionary = {}
 
+# Weights for each tile, influencing their frequency.
+# Optional. Format: { "tile_name": float_weight }
+var _weights: Dictionary = {}
+
 # Direction vectors for neighbor finding.
 const _directions = {
 	"up": Vector2.UP, "down": Vector2.DOWN,
@@ -25,18 +29,26 @@ const _directions = {
 }
 
 
-func _init(width: int, height: int, tiles: Array, rules: Dictionary):
+func _init(width: int, height: int, tiles: Array, rules: Dictionary, weights: Dictionary = {}):
 	"""
 	Initializes the WFC solver.
 	- width: The width of the grid to generate.
 	- height: The height of the grid to generate.
 	- tiles: An array of all possible tile identifiers.
 	- rules: A dictionary defining adjacency constraints for each tile.
+	- weights: An optional dictionary mapping tile names to float weights.
 	"""
 	self._width = width
 	self._height = height
 	self._tiles = tiles
 	self._rules = rules
+	self._weights = weights
+
+	# Validate and normalize weights. Default to 1.0 if not specified.
+	if not _weights.is_empty():
+		for tile in _tiles:
+			if not _weights.has(tile) or not _weights[tile] is float:
+				_weights[tile] = 1.0
 
 	# Initialize the grid. Each cell starts with all possible tiles.
 	var all_tiles = _tiles.duplicate(true)
@@ -89,26 +101,41 @@ func is_fully_collapsed() -> bool:
 
 func find_lowest_entropy_cell() -> Vector2:
 	"""
-	Finds the uncollapsed cell with the fewest possible states (lowest entropy).
+	Finds the uncollapsed cell with the lowest entropy.
+	If weights are provided, uses Shannon entropy for a more nuanced measurement.
+	Otherwise, it defaults to counting the number of possibilities.
 	Returns:
 	- Coordinates of the cell to collapse.
 	- Vector2.ZERO if all cells are already collapsed.
 	- Vector2(-1, -1) if a contradiction (a cell with 0 possibilities) is found.
 	"""
-	var min_entropy = _tiles.size() + 1
+	var min_entropy = INF
 	var lowest_entropy_cells: Array = []
 
 	for y in range(_height):
 		for x in range(_width):
-			var cell_entropy = _grid[y][x].size()
+			var possibilities = _grid[y][x]
+			var cell_entropy = possibilities.size()
+
 			if cell_entropy == 0:
 				return Vector2(-1, -1) # Contradiction found
 
 			if cell_entropy > 1:
-				if cell_entropy < min_entropy:
-					min_entropy = cell_entropy
+				var entropy_val = 0.0
+				if not _weights.is_empty():
+					# Use Shannon entropy for weighted tiles
+					entropy_val = _calculate_shannon_entropy(possibilities)
+				else:
+					# Default to the number of possibilities
+					entropy_val = float(cell_entropy)
+
+				# Add a small amount of noise to break ties randomly
+				entropy_val -= randf() * 1e-6
+
+				if entropy_val < min_entropy:
+					min_entropy = entropy_val
 					lowest_entropy_cells = [Vector2(x, y)]
-				elif cell_entropy == min_entropy:
+				elif entropy_val == min_entropy:
 					lowest_entropy_cells.append(Vector2(x, y))
 
 	if lowest_entropy_cells.is_empty():
@@ -116,6 +143,27 @@ func find_lowest_entropy_cell() -> Vector2:
 
 	# Pick one randomly from the candidates to break ties
 	return lowest_entropy_cells[randi() % lowest_entropy_cells.size()]
+
+
+func _calculate_shannon_entropy(possibilities: Array) -> float:
+	"""
+	Calculates the Shannon entropy for a cell given its possible tiles.
+	H(X) = -sum(P(x) * log2(P(x)))
+	"""
+	var total_weight = 0.0
+	for tile in possibilities:
+		total_weight += _weights.get(tile, 1.0)
+
+	if total_weight <= 0.0: return 0.0
+
+	var entropy = 0.0
+	for tile in possibilities:
+		var weight = _weights.get(tile, 1.0)
+		if weight > 0:
+			var probability = weight / total_weight
+			entropy -= probability * log(probability) / log(2)
+
+	return entropy
 
 
 func observe(coords: Vector2) -> bool:
@@ -130,13 +178,44 @@ func observe(coords: Vector2) -> bool:
 	if possibilities.is_empty():
 		return false # Contradiction
 
-	# Randomly choose one of the remaining possibilities
-	var chosen_state = possibilities[randi() % possibilities.size()]
+	var chosen_state
+	# If weights are defined, use a weighted random selection.
+	if not _weights.is_empty():
+		chosen_state = _get_weighted_random_choice(possibilities)
+	else:
+		# Fallback to standard random choice if no weights are provided.
+		chosen_state = possibilities[randi() % possibilities.size()]
+
+	if chosen_state == null:
+		return false # Should not happen if possibilities is not empty
 
 	# Collapse the cell to this single state
 	_grid[y][x] = [chosen_state]
 
 	return true
+
+
+func _get_weighted_random_choice(choices: Array) -> Variant:
+	"""
+	Selects an item from a list based on its assigned weight.
+	"""
+	var total_weight = 0.0
+	for choice in choices:
+		total_weight += _weights.get(choice, 1.0)
+
+	if total_weight <= 0.0:
+		# Fallback if weights are invalid or sum to zero.
+		return choices[randi() % choices.size()] if not choices.is_empty() else null
+
+	var random_point = randf() * total_weight
+	var current_weight = 0.0
+
+	for choice in choices:
+		current_weight += _weights.get(choice, 1.0)
+		if random_point < current_weight:
+			return choice
+
+	return choices[-1] # Fallback in case of floating point inaccuracies
 
 
 func propagate(initial_coords: Vector2):
