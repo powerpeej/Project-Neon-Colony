@@ -1,4 +1,3 @@
-# src/procgen/lsystem.gd
 class_name LSystem
 extends RefCounted
 

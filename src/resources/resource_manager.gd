@@ -1,28 +1,36 @@
 # src/resources/resource_manager.gd
 extends Node
 
-signal resource_changed(resource_name, new_amount)
+const Resource_class = preload("res://src/resources/resource.gd")
 
 var resources: Dictionary = {
-	"energy": 1000,
-	"materials": 500
+	"energy": Resource_class.new("Energy", 1000),
+	"materials": Resource_class.new("Materials", 500)
 }
 
-func get_resource_amount(resource_name: String) -> int:
-	if resources.has(resource_name):
-		return resources[resource_name]
+func add_resource(p_name: String, p_amount: int) -> void:
+	if resources.has(p_name.to_lower()):
+		resources[p_name.to_lower()].amount += p_amount
 	else:
-		return 0
+		print("Resource type '%s' does not exist." % p_name)
 
-func add_resource(resource_name: String, amount: int):
-	if resources.has(resource_name):
-		resources[resource_name] += amount
-		emit_signal("resource_changed", resource_name, resources[resource_name])
-
-func remove_resource(resource_name: String, amount: int) -> bool:
-	if resources.has(resource_name) and resources[resource_name] >= amount:
-		resources[resource_name] -= amount
-		emit_signal("resource_changed", resource_name, resources[resource_name])
-		return true
+func remove_resource(p_name: String, p_amount: int) -> bool:
+	if resources.has(p_name.to_lower()):
+		var res: Resource = resources[p_name.to_lower()]
+		if res.amount >= p_amount:
+			res.amount -= p_amount
+			return true
+		else:
+			print("Not enough %s. Required: %d, Available: %d" % [p_name, p_amount, res.amount])
+			return false
 	else:
+		print("Resource type '%s' does not exist." % p_name)
 		return false
+
+func get_resource(p_name: String) -> Resource:
+	if resources.has(p_name.to_lower()):
+		return resources[p_name.to_lower()]
+	return null
+
+func get_all_resources() -> Dictionary:
+	return resources

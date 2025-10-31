@@ -1,12 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bixy56npg2x5c"]
+[gd_scene load_steps=2 format=3 uid="uid://bixy56npg2x5c"]
 
 [ext_resource type="PackedScene" uid="uid://cgrc56npg2x5c" path="res://scenes/player.tscn" id="1_abcde"]
-[ext_resource type="Script" path="res://src/procgen/road_generator.gd" id="2_fghij"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_abcde")]
 position = Vector2(576, 324)
-
-[node name="RoadGenerator" type="Node2D" parent="."]
-script = ExtResource("2_fghij")
