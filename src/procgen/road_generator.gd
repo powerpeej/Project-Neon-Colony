@@ -37,8 +37,14 @@ func generate_and_draw():
 	turtle.interpret(lsystem_string)
 
 	# 4. Instantiate Tiles
-	var drawer = RoadDrawer.new(road_network, tile_size)
-	drawer.draw_tiles(self)
+	var tile_map = get_node_or_null("RoadTileMap") as TileMap
+	if not tile_map:
+		tile_map = TileMap.new()
+		tile_map.name = "RoadTileMap"
+		add_child(tile_map)
+
+	var drawer = RoadDrawer.new(road_network, tile_map)
+	drawer.draw_tiles()
 
 func _generate_lsystem_string() -> String:
 	lsystem = LSystem.new(axiom, rules)
