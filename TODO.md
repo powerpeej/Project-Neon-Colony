@@ -6,6 +6,16 @@ This file outlines the tasks for the development team.
 ## **Pending Tasks**
 ---
 
+### **Project Manager**
+- **Assignee:** Project Manager Agent
+- **Status:** Pending
+- **Task:**
+    1. Review the implemented L-System and road generation.
+    2. Define the requirements for the initial building types (e.g., power plants, housing, factories).
+- **Goal:** Ensure the procedural generation system meets project standards and to guide the development of the building generation system.
+
+---
+
 ### **Programmer**
 - **Assignee:** Programmer Agent
 - **Status:** Pending
@@ -18,6 +28,17 @@ This file outlines the tasks for the development team.
 
 ---
 
+### **Programmer**
+- **Assignee:** Programmer Agent
+- **Status:** Pending
+- **Task:**
+    1. Implement a basic resource system (e.g., energy, materials).
+    2. Create a global script (`/src/resource_manager.gd`) to manage resource storage and access.
+    3. Create a simple UI scene (`/scenes/ui/resource_display.tscn`) to display the current resource levels.
+- **Goal:** Establish the foundational economic loop of the game.
+
+---
+
 ### **Artist**
 - **Assignee:** Artist Agent
 - **Status:** Pending
@@ -27,6 +48,36 @@ This file outlines the tasks for the development team.
     3.  All assets should be 32x32 pixels and fit the cyberpunk theme.
     4.  Export the assets as PNG files and add them to the `art/tiles/` directory.
 - **Goal:** Provide the visual assets needed for the procedural city generation.
+
+---
+
+### **Artist**
+- **Assignee:** Artist Agent
+- **Status:** Pending
+- **Task:**
+    1. Design UI elements for the resource display (e.g., icons for energy and materials, a background panel).
+    2. Create sprites for the initial building types (power plant, housing, factory).
+- **Goal:** Create the visual assets for the resource system and initial buildings.
+
+---
+
+### **Researcher**
+- **Assignee:** Researcher Agent
+- **Status:** Pending
+- **Task:**
+    1. Research and write a report on simple agent-based AI behavior systems (e.g., state machines, behavior trees).
+    2. Propose a basic AI architecture for the colonists (e.g., what needs they should have, how they should interact with buildings).
+- **Goal:** To inform the design of the colonist AI system.
+
+---
+
+### **Researcher**
+- **Assignee:** Researcher Agent
+- **Status:** Pending
+- **Task:**
+    1. Investigate performance optimization techniques for large-scale simulations in Godot (e.g., multithreading, visual optimization).
+    2. Write a document summarizing the findings and providing recommendations.
+- **Goal:** To ensure the game can handle a large number of entities and complex systems without performance issues.
 
 ---
 ## **Completed Tasks**
