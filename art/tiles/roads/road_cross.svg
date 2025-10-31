@@ -1,20 +1,7 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<defs>
-    <filter id="glow">
-        <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
-        <feMerge>
-            <feMergeNode in="coloredBlur"/>
-            <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-    </filter>
-</defs>
-<rect width="64" height="64" fill="#1A1A1A"/>
-<rect x="16" y="0" width="32" height="64" fill="#2C2C2C"/>
-<rect x="0" y="16" width="64" height="32" fill="#2C2C2C"/>
-<g style="filter:url(#glow);">
-    <rect x="30" y="4" width="4" height="8" fill="#FFD700"/>
-    <rect x="30" y="52" width="4" height="8" fill="#FFD700"/>
-    <rect x="4" y="30" width="8" height="4" fill="#FFD700"/>
-    <rect x="52" y="30" width="8" height="4" fill="#FFD700"/>
-</g>
+<rect width="64" height="64" fill="#1E1E1E"/>
+<rect x="28" y="0" width="8" height="64" fill="#4A4A4A"/>
+<rect x="0" y="28" width="64" height="8" fill="#4A4A4A"/>
+<rect x="30" y="0" width="4" height="64" fill="#00FFFF"/>
+<rect x="0" y="30" width="64" height="4" fill="#00FFFF"/>
 </svg>

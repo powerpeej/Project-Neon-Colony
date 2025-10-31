@@ -1,19 +1,5 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<defs>
-    <filter id="glow">
-        <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
-        <feMerge>
-            <feMergeNode in="coloredBlur"/>
-            <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-    </filter>
-</defs>
-<rect width="64" height="64" fill="#1A1A1A"/>
-<rect x="16" width="32" height="64" fill="#2C2C2C"/>
-<g style="filter:url(#glow);">
-    <rect x="30" y="4" width="4" height="8" fill="#FFD700"/>
-    <rect x="30" y="20" width="4" height="8" fill="#FFD700"/>
-    <rect x="30" y="36" width="4" height="8" fill="#FFD700"/>
-    <rect x="30" y="52" width="4" height="8" fill="#FFD700"/>
-</g>
+<rect width="64" height="64" fill="#1E1E1E"/>
+<rect x="28" width="8" height="64" fill="#4A4A4A"/>
+<rect x="30" y="-2" width="4" height="68" fill="#00FFFF"/>
 </svg>
