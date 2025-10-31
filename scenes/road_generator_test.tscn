@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0j4gq8x8g7x"]
+
+[ext_resource type="Script" path="res://src/procgen/road_generator.gd" id="1_vjxtq"]
+
+[node name="RoadGeneratorTest" type="Node2D"]
+
+[node name="RoadGenerator" type="Node2D" parent="."]
+script = ExtResource("1_vjxtq")
+
+[node name="RoadTileMap" type="TileMap" parent="."]
+tile_set = preload("res://scenes/tiles/road_tileset.tres")
+format = 2

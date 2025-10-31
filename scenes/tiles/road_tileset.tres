@@ -1,0 +1,67 @@
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://dps8a0c843vds"]
+
+[ext_resource type="Texture2D" uid="uid://dfljuqwgjgsdn" path="res://art/tiles/roads/road_straight.svg" id="1_5x003"]
+[ext_resource type="Texture2D" uid="uid://c6g7g8f7yqs1c" path="res://art/tiles/roads/road_corner.svg" id="2_2i2gn"]
+[ext_resource type="Texture2D" uid="uid://bdt5wveb8j7f4" path="res://art/tiles/roads/road_t_junction.svg" id="3_6d8d6"]
+[ext_resource type="Texture2D" uid="uid://c2w2t8y4xbnv6" path="res://art/tiles/roads/road_cross.svg" id="4_v7xwx"]
+[ext_resource type="Texture2D" uid="uid://bcku5k0g1s1x1" path="res://art/tiles/roads/road_end.svg" id="5_2o4er"]
+
+[resource]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_g3d8a")
+sources/1 = SubResource("TileSetAtlasSource_b3d8f")
+sources/2 = SubResource("TileSetAtlasSource_c3d8g")
+sources/3 = SubResource("TileSetAtlasSource_d3d8h")
+sources/4 = SubResource("TileSetAtlasSource_e3d8i")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g3d8a"]
+resource_name = "road_straight"
+texture = ExtResource("1_5x003")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/left_side = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b3d8f"]
+resource_name = "road_corner"
+texture = ExtResource("2_2i2gn")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/left_side = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c3d8g"]
+resource_name = "road_t_junction"
+texture = ExtResource("3_6d8d6")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/left_side = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d3d8h"]
+resource_name = "road_cross"
+texture = ExtResource("4_v7xwx")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/left_side = 0
+0:0/0/terrains_peering_bit/top_side = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e3d8i"]
+resource_name = "road_end"
+texture = ExtResource("5_2o4er")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/left_side = 0
