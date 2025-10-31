@@ -12,7 +12,7 @@ func _init(road_network: RoadNetwork, tile_size: int):
 func interpret(lsystem_string: String):
 	var current_pos := Vector2.ZERO
 	var current_angle: float = -90.0 # Start facing up
-	var delta_angle: float = 22.5
+	var delta_angle: float = 90.0
 	var step_length: float = tile_size
 
 	var pos_stack = []
