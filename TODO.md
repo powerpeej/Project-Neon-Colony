@@ -70,16 +70,6 @@ This file outlines the tasks for the development team.
 - **Goal:** To inform the design of the colonist AI system.
 
 ---
-
-### **Researcher**
-- **Assignee:** Researcher Agent
-- **Status:** Pending
-- **Task:**
-    1. Investigate performance optimization techniques for large-scale simulations in Godot (e.g., multithreading, visual optimization).
-    2. Write a document summarizing the findings and providing recommendations.
-- **Goal:** To ensure the game can handle a large number of entities and complex systems without performance issues.
-
----
 ## **Completed Tasks**
 ---
 
@@ -115,3 +105,13 @@ This file outlines the tasks for the development team.
 ### **Researcher**
 - **Status:** Complete
 - **Task:** Research and summarize findings on procedural generation algorithms.
+
+---
+
+### **Researcher**
+- **Assignee:** Researcher Agent
+- **Status:** Complete
+- **Task:**
+    1. Investigate performance optimization techniques for large-scale simulations in Godot (e.g., multithreading, visual optimization).
+    2. Write a document summarizing the findings and providing recommendations. See `docs/performance_optimization.md`.
+- **Goal:** To ensure the game can handle a large number of entities and complex systems without performance issues.
