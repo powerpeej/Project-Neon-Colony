@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://c63j732i3t4g1"]
+
+[ext_resource type="Texture2D" uid="uid://dsvo1ko0g1gfu" path="res://art/ui/panel_background.svg" id="1_w5kpl"]
+[ext_resource type="Texture2D" uid="uid://c07j55vknq247" path="res://art/ui/energy_icon.svg" id="2_c5jlg"]
+[ext_resource type="Texture2D" uid="uid://dpw5j2vghqfg6" path="res://art/ui/materials_icon.svg" id="3_gqvf3"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_abcde"]
+texture = ExtResource("1_w5kpl")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[ext_resource type="Script" path="res://src/ui/resource_ui.gd" id="5_abcde"]
+
+[node name="ResourceUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_abcde")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -250.0
+offset_bottom = 50.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_abcde")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="EnergyIcon" type="TextureRect" parent="MarginContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_c5jlg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EnergyLabel" type="Label" parent="MarginContainer/Panel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "9999"
+vertical_alignment = 1
+
+[node name="MaterialsIcon" type="TextureRect" parent="MarginContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_gqvf3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MaterialsLabel" type="Label" parent="MarginContainer/Panel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "9999"
+vertical_alignment = 1
