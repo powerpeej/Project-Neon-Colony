@@ -270,7 +270,7 @@ def run_review_mode():
 #==============================================================================
 if __name__ == "__main__":
     if len(sys.argv) < 2 or sys.argv[1] not in ['create', 'review', 'sync']:
-        print("Usage: python agent_controller.py [mode]")
+        print("Usage: python auto_agent.py [mode]")
         print("Modes:")
         print("  sync     - Scans for existing Jules sessions and adopts them into the tracking file.")
         print("  create   - Creates Jules tasks for any new, untracked items in TODO.md.")
