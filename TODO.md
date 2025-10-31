@@ -34,7 +34,7 @@ This file outlines the tasks for the development team.
 - **Task:**
     1. Implement a basic resource system (e.g., energy, materials).
     2. Create a global script (`/src/resource_manager.gd`) to manage resource storage and access.
-    3. Create a simple UI scene (`/scenes/ui/resource_display.tscn`) to display the current resource levels.
+    3. Create a simple UI scene (`/scenes/ui/resource_display.tscn`) to display the current resource levels. The necessary art assets are now available in `art/ui/`.
 - **Goal:** Establish the foundational economic loop of the game.
 
 ---
@@ -55,9 +55,8 @@ This file outlines the tasks for the development team.
 - **Assignee:** Artist Agent
 - **Status:** Pending
 - **Task:**
-    1. Design UI elements for the resource display (e.g., icons for energy and materials, a background panel).
-    2. Create sprites for the initial building types (power plant, housing, factory).
-- **Goal:** Create the visual assets for the resource system and initial buildings.
+    1. Create sprites for the initial building types (power plant, housing, factory).
+- **Goal:** Create the visual assets for the initial buildings.
 
 ---
 
@@ -109,6 +108,14 @@ This file outlines the tasks for the development team.
 ### **Artist**
 - **Status:** Complete
 - **Task:** Design and create a placeholder sprite for the main character.
+
+---
+
+### **Artist**
+- **Status:** Complete
+- **Task:**
+    1. Design UI elements for the resource display (e.g., icons for energy and materials, a background panel).
+- **Goal:** Create the visual assets for the resource system.
 
 ---
 
