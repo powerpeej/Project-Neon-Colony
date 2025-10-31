@@ -1,4 +1,19 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="64" height="64" fill="#4C4C4C"/>
-<path d="M22 0V42H64V22H42V0H22Z" fill="#808080"/>
+<defs>
+    <filter id="glow">
+        <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+        <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
+</defs>
+<rect width="64" height="64" fill="#1A1A1A"/>
+<path d="M16 0H48V64H0V16C0 7.16344 7.16344 0 16 0Z" fill="#2C2C2C"/>
+<g style="filter:url(#glow);">
+    <path d="M30 4H34V12H30V4Z" fill="#FFD700"/>
+    <path d="M30 20H34V28H30V20Z" fill="#FFD700"/>
+    <path d="M52 30H60V34H52V30Z" fill="#FFD700"/>
+    <path d="M36 30H44V34H36V30Z" fill="#FFD700"/>
+</g>
 </svg>
