@@ -1,0 +1,25 @@
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="panelGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2a; stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#0f0f1a; stop-opacity:0.95" />
+    </linearGradient>
+    <pattern id="circuitPattern" patternUnits="userSpaceOnUse" width="20" height="20">
+      <path d="M0 10 L 5 10 L 5 5 L 10 5 M10 15 L 15 15 L 15 10 L 20 10" stroke="#334455" stroke-width="0.5" fill="none"/>
+    </pattern>
+  </defs>
+
+  <rect width="200" height="60" fill="url(#circuitPattern)" />
+
+  <path d="M 0,5
+           L 10,0
+           L 190,0
+           L 200,5
+           L 200,55
+           L 190,60
+           L 10,60
+           L 0,55
+           Z"
+        fill="url(#panelGradient)"
+        stroke="#00aaff" stroke-width="1.5" />
+</svg>
